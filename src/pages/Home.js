@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { Articles } from "../components/Articles/index";
 import { CONTAINER_WIDTH } from "../common/constant/theme";
 import { SideBar } from "../components/Sidebar";
 import { Spinner } from "../common/ui";
-import ReactPaginate from "react-paginate";
 
 const OuterContainer = styled.div`
   display: flex;
-  max-width: ${CONTAINER_WIDTH.lg};
+  max-width: ${CONTAINER_WIDTH.xlg};
   width: 100%;
   box-sizing: border-box;
-  padding: 20px;
   justify-content: space-around;
   margin: 0 auto;
 
@@ -23,7 +21,7 @@ const OuterContainer = styled.div`
 
 const Container = styled.div`
   box-sizing: border-box;
-  padding: 40px 70px 30px 0;
+  padding: 20px;
 
   @media (max-width: 600px) {
     display: block;
@@ -45,20 +43,9 @@ const SideBarWrapper = styled.div`
   }
 `;
 
-const ReactPaginateStyled = styled(ReactPaginate)`
-  ${css`
-    .paginate-container {
-      display: flex;
-      list-style: none;
-      outline: none;
-    }
-  `};
-`;
-
 export const Home = () => {
   const [articles, setArticle] = useState([]);
   const [users, setUser] = useState({});
-  // const [currentPage] = useState(1);
 
   const fetchData = async () => {
     const article = await fetch(
@@ -86,14 +73,8 @@ export const Home = () => {
             <Articles key={article.id} articles={article} />
           ))
         )}
-
-        {/* <ReactPaginateStyled
-          containerClassName="paginate-container"
-          // initialPage={currentPage}
-          previousClassName="prev-button"
-        /> */}
       </Container>
-      <SideBarWrapper>{users && <SideBar user={users} />}</SideBarWrapper>
+      <SideBarWrapper> {users && <SideBar user={users} />}</SideBarWrapper>
     </OuterContainer>
   );
 };

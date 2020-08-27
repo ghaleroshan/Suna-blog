@@ -1,6 +1,6 @@
-import React from 'react';
-import styled from 'styled-components';
-import { THEME } from '../../common/constant/theme';
+import React from "react";
+import styled from "styled-components";
+import { THEME } from "../../common/constant/theme";
 
 const Wrapper = styled.div`
   display: flex;
@@ -34,7 +34,7 @@ const Description = styled.p`
   font-weight: ${THEME.font.weight.thin};
   font-family: ${THEME.font.fontFamily};
   font-size: 90%;
-  color: #808080;
+  color: #4a5568;
   word-spacing: 2px;
   line-height: 1.6;
 `;
@@ -65,13 +65,13 @@ export const SideBar = ({ user }) => {
           Trendy updates every day.
         </Description>
         <SocialWrapper>
-          <SocialLink href='https://www.facebook.com/ghaleroshan/'>
+          <SocialLink href="https://www.facebook.com/ghaleroshan/">
             + FACEBOOK
           </SocialLink>
-          <SocialLink href='https://www.facebook.com/ghaleroshan/'>
+          <SocialLink href="https://www.facebook.com/ghaleroshan/">
             + INSTAGRAM
           </SocialLink>
-          <SocialLink href='https://www.facebook.com/ghaleroshan/'>
+          <SocialLink href="https://www.facebook.com/ghaleroshan/">
             + TWITTER
           </SocialLink>
         </SocialWrapper>

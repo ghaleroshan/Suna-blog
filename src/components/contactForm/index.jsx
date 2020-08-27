@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import { THEME } from '../../common/constant/theme';
-import { Spinner } from '../../common/ui';
-import { asRem } from '../../helpers';
+import React, { useState } from "react";
+import styled from "styled-components";
+import emailjs from "emailjs-com";
+import { THEME } from "../../common/constant/theme";
+import { asRem } from "../../helpers";
 
 const Form = styled.form`
   display: flex;
@@ -23,12 +23,11 @@ const Wrapper = styled.div`
   margin-top: 10px;
 `;
 
-const Title = styled.h3`
+const Title = styled.h1`
   box-sizing: border-box;
   text-align: center;
   text-transform: uppercase;
-  font-size: 24px;
-  font-family: ${THEME.font.fontFamily};
+  font: 24px ${THEME.font.fontFamily};
 `;
 
 const Input = styled.input`
@@ -40,6 +39,7 @@ const Input = styled.input`
   font-family: ${THEME.font.fontFamily};
   margin: 10px 0;
   padding: 10px;
+  outline: none;
 `;
 
 const TextArea = styled.textarea`
@@ -52,6 +52,8 @@ const TextArea = styled.textarea`
   padding: 10px;
   font-family: ${THEME.font.fontFamily};
   border-radius: 3px;
+  outline: none;
+  resize: vertical;
 `;
 
 const Button = styled.button`
@@ -64,42 +66,64 @@ const Button = styled.button`
   height: 40px;
   color: #fff;
   font-family: ${THEME.font.fontFamily};
+  outline: none;
 `;
 
-let timeout;
 export const Contact = () => {
-  const [loading, setLoading] = useState(false);
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [message, setMessage] = useState("");
 
-  const handleSubmit = (e) => {
+  const sendEmail = (e) => {
     e.preventDefault();
-    setLoading(true);
-    timeout = setTimeout(() => {
-      setLoading(false);
-    }, 2000);
+    const submitValue = {
+      email: email,
+      contact_number: phone,
+      message: message,
+    };
+
+    const service_id = "default_service";
+    const user_id = "user_ZV7jfFiGSchESSCRKBAKT";
+    const template_id = "contact_form";
+    emailjs.send(service_id, template_id, submitValue, user_id).then(
+      (result) => {
+        alert("Email sent successfully.");
+        console.log(result.text);
+      },
+      (error) => {
+        console.log(error.text);
+      }
+    );
   };
 
-  useEffect(() => {
-    if (timeout) {
-      clearTimeout(timeout);
-    }
-  }, []);
-
   return (
-    <Form>
+    <Form onSubmit={sendEmail}>
       <Title> Contact Me </Title>
       <Wrapper>
-        {loading ? (
-          <Spinner />
-        ) : (
-          <>
-            <Input type='name' placeholder='Full Name' />
-            <Input type='phone' placeholder='Phone' />
-            <TextArea placeholder='Enter your message' />
-          </>
-        )}
-        <Button disable={loading} onClick={handleSubmit} type='submit'>
-          Submit
-        </Button>
+        <Input
+          type="email"
+          placeholder="Email"
+          onChange={(e) => {
+            setEmail(e.target.value);
+          }}
+          required
+        />
+        <Input
+          type="phone"
+          placeholder="Phone"
+          onChange={(e) => {
+            setPhone(e.target.value);
+          }}
+        />
+        <TextArea
+          type="text"
+          placeholder="Enter your message"
+          onChange={(e) => {
+            setMessage(e.target.value);
+          }}
+          required
+        />
+        <Button> Submit </Button>
       </Wrapper>
     </Form>
   );

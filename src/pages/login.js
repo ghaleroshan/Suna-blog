@@ -1,6 +1,8 @@
-import React from 'react';
-import styled from 'styled-components';
-import { THEME } from '../common/constant/theme';
+import React, { useState, useEffect } from "react";
+import { Link, useHistory } from "react-router-dom";
+import styled from "styled-components";
+import { THEME } from "../common/constant/theme";
+import { Spinner } from "../common/ui";
 
 const Body = styled.div`
   width: 100vw;
@@ -73,7 +75,7 @@ const Input = styled.input`
   margin-bottom: 10px;
   outline: none;
   cursor: pointer;
-  transition: border-bottom 0.5s cubic-bezier(0.61, 0.18, 0.84, 0.7);
+  transition: border-bottom 0.2s cubic-bezier(0.61, 0.18, 0.84, 0.7);
 
   &:focus {
     border-bottom: 1px solid #000;
@@ -106,7 +108,7 @@ const CheckboxWrapper = styled.div`
 
 const PrimaryButton = styled.button`
   max-width: 120px;
-  background: #6babe4;
+  background: #145da0;
   border: none;
   box-sizing: border-box;
   padding: 10px 24px;
@@ -114,12 +116,19 @@ const PrimaryButton = styled.button`
   border-radius: 5px;
   font: 12px ${THEME.font.fontFamily};
   margin-bottom: 50px;
+  outline: none;
+  transition: all 0.1s ease;
+
+  :hover {
+    background: #1a77cd;
+  }
 `;
 
 const SocialWrapper = styled.div`
   display: flex;
   flex-flow: row wrap;
   align-items: center;
+  cursor: pointer;
 `;
 
 const SocialIcons = styled.i`
@@ -134,42 +143,87 @@ const SocialIcons = styled.i`
   }
   &.google {
     color: #e44636;
+
+    :hover {
+      color: #cc2c1b;
+    }
+  }
+
+  :hover {
+    color: #1a77cd;
   }
 `;
 
+const GoBackbtn = styled(PrimaryButton)`
+  position: absolute;
+  top: 2%;
+  left: 50%;
+  transform: translateX(-50%);
+`;
+
+let timeout;
+
 export const Login = () => {
+  const [loading, setLoading] = useState(false);
+  const history = useHistory();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setLoading(true);
+    timeout = setTimeout(() => {
+      setLoading(false);
+      alert("You have been succesfully signed in");
+      history.push("/");
+    }, 2000);
+  };
+
+  useEffect(() => {
+    if (timeout) {
+      clearTimeout(timeout);
+    }
+  }, []);
+
   return (
     <Body>
-      <Wrapper>
-        <ImageWrapper>
-          <Image src={`${process.env.PUBLIC_URL}/assets/img/login.jpg`} />
-          <Tag> create an account</Tag>
-        </ImageWrapper>
-        <LoginForm>
-          <Title> Log In</Title>
-          <InputWrapper>
-            <Icon className="fas fa-user" />
-            <Input placeholder="Your Name" />
-            <RightIcon className="far fa-keyboard" />
-          </InputWrapper>
-          <InputWrapper>
-            <Icon className="fas fa-unlock-alt" />
-            <Input placeholder="Password" />
-            <RightIcon className="far fa-keyboard" />
-          </InputWrapper>
-          <CheckboxWrapper>
-            <CheckBox type="checkbox" />
-            <Details> Remember me</Details>
-          </CheckboxWrapper>
-          <PrimaryButton> Log in</PrimaryButton>
-          <SocialWrapper>
-            <Details> Or login with</Details>
-            <SocialIcons className="fab fa-facebook-square facebook" />
-            <SocialIcons className="fab fa-twitter-square twitter" />
-            <SocialIcons className="fab fa-google-plus-square google" />
-          </SocialWrapper>
-        </LoginForm>
-      </Wrapper>
+      {loading ? (
+        <Spinner />
+      ) : (
+        <Wrapper>
+          <Link to="/">
+            <GoBackbtn> Go Back </GoBackbtn>
+          </Link>
+          <ImageWrapper>
+            <Image src={`${process.env.PUBLIC_URL}/assets/img/login.jpg`} />
+            <Tag> create an account</Tag>
+          </ImageWrapper>
+          <LoginForm>
+            <Title> Log In</Title>
+            <InputWrapper>
+              <Icon className="fas fa-user" />
+              <Input placeholder="Your Name" />
+              <RightIcon className="far fa-keyboard" />
+            </InputWrapper>
+            <InputWrapper>
+              <Icon className="fas fa-unlock-alt" />
+              <Input placeholder="Password" />
+              <RightIcon className="far fa-keyboard" />
+            </InputWrapper>
+            <CheckboxWrapper>
+              <CheckBox type="checkbox" />
+              <Details> Remember me</Details>
+            </CheckboxWrapper>
+            <PrimaryButton type="submit" onClick={handleSubmit}>
+              Log in
+            </PrimaryButton>
+            <SocialWrapper>
+              <Details> Or login with</Details>
+              <SocialIcons className="fab fa-facebook-square facebook" />
+              <SocialIcons className="fab fa-twitter-square twitter" />
+              <SocialIcons className="fab fa-google-plus-square google" />
+            </SocialWrapper>
+          </LoginForm>
+        </Wrapper>
+      )}
     </Body>
   );
 };

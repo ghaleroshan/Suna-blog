@@ -1,7 +1,8 @@
-import React from 'react';
-import styled from 'styled-components';
-import { SortableCard } from '../components/Sort/index';
-import { Navbar } from '../components/Navbar';
+import React from "react";
+import styled from "styled-components";
+import { SortableCard } from "../components/Sort/index";
+import { Navbar } from "../components/Navbar";
+import { Hero } from "../components/hero";
 
 const SortableContainer = styled.div`
   display: flex;
@@ -19,6 +20,8 @@ const Title = styled.h4`
 export const AboutMe = () => {
   return (
     <>
+      <Hero />
+
       <Navbar />
       <SortableContainer>
         <Title> Drag the items up or down to sort them to your wish </Title>
