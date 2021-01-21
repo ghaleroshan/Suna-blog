@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
-import { ContactPage } from "../src/pages/contact";
 import { BrowserRouter, Route } from "react-router-dom";
 import { Normalize } from "styled-normalize";
 import { AboutMe } from "./pages/AboutMe";
@@ -15,7 +14,6 @@ ReactDOM.render(
       <Normalize />
       <Route exact path="/" component={App} />
       <Route path="/about-me" component={AboutMe} />
-      <Route path="/contact-me" component={ContactPage} />
       <Route path="/login" component={Login} />
     </BrowserRouter>
   </React.StrictMode>,

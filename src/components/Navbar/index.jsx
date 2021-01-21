@@ -3,19 +3,17 @@ import styled from "styled-components";
 import { Burger } from "./Burger";
 
 const Nav = styled.nav`
-  height: 100%;
-  width: 100%;
-  padding: 10px 0;
   box-sizing: border-box;
-  background: #777;
+  height: 5rem;
+  background:#eee;
   position: sticky;
   margin-bottom: 5px;
   top: 0;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   transition: all s ease-in;
-  z-index: 1;
+  z-index: 10;
 `;
 
 export const Navbar = () => {

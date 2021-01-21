@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { RightNav } from "./RightNav";
+import { LOGO } from "../../common/constant/icon_base64";
+
 
 const StyledBurger = styled.div`
   width: 2rem;
@@ -10,6 +12,7 @@ const StyledBurger = styled.div`
   right: 20px;
   z-index: 20;
   display: none;
+  cursor: pointer;
 
   @media (max-width: 790px) {
     display: flex;
@@ -37,11 +40,19 @@ const StyledBurger = styled.div`
   }
 `;
 
+const ImgStyle = styled.img`
+  max-width: 150px;
+  width: 100%;
+  height: auto;
+  opacity: 0.9;
+`;
+
 export const Burger = () => {
   const [open, setOpen] = useState(false);
 
   return (
     <>
+      <ImgStyle src={`data:image/png;base64 ${LOGO}`} />
       <StyledBurger open={open} onClick={() => setOpen(!open)}>
         <div />
         <div />

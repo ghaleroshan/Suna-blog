@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+
 import { Articles } from "../components/Articles/index";
 import { CONTAINER_WIDTH } from "../common/constant/theme";
 import { SideBar } from "../components/Sidebar";
@@ -21,7 +22,7 @@ const OuterContainer = styled.div`
 
 const Container = styled.div`
   box-sizing: border-box;
-  padding: 20px;
+  padding: 40px;
 
   @media (max-width: 600px) {
     display: block;
@@ -35,7 +36,6 @@ const Container = styled.div`
 const SideBarWrapper = styled.div`
   display: flex;
   box-sizing: border-box;
-  margin-top: 46px;
 
   @media (max-width: 600px) {
     display: block;
@@ -75,6 +75,7 @@ export const Home = () => {
         )}
       </Container>
       <SideBarWrapper> {users && <SideBar user={users} />}</SideBarWrapper>
+
     </OuterContainer>
   );
 };

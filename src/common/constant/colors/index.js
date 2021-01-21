@@ -2,6 +2,7 @@ export const COLORS = {
   fadedWhite: '#FAFAFA',
   white: '#FFF',
   black: '#000',
+  offBlack: '#100f10;',
   bgDark: '#333333',
   blue: '#02A9F4',
   midBlue: '#4A90E2',

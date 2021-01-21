@@ -1,31 +1,32 @@
-import React from "react";
-import { Link as ReactRouterDomLink } from "react-router-dom";
-import styled from "styled-components";
-import { THEME } from "../../common/constant/theme";
-import { asRem } from "../../helpers";
+import React from 'react';
+import { Link as ReactRouterDomLink } from 'react-router-dom';
+import styled from 'styled-components';
+import { THEME } from '../../common/constant/theme';
+import { asRem } from '../../helpers';
 
 const Ul = styled.ul`
   list-style: none;
-  width: 100%;
+  width: 60%;
   box-sizing: border-box;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: flex-end;
   margin: 0;
 
   @media (max-width: 790px) {
     flex-direction: column;
+    justify-content: flex-start;
     flex-flow: column wrap;
     position: fixed;
     box-sizing: border-box;
     background: #eee;
     margin: 0;
-    transform: ${({ open }) => (open ? "translateX(0)" : "translateX(100%)")};
+    transform: ${({ open }) => (open ? 'translateX(0)' : 'translateX(100%)')};
     top: 0;
     right: 0;
+    padding-top: 50px;
     height: 100vh;
-    width: 350px;
-    padding-top: 60px;
+    width: 70%;
     transition: transform 0.3s ease-in-out;
     z-index: 1;
   }
@@ -39,16 +40,18 @@ const Ul = styled.ul`
 const Link = styled(ReactRouterDomLink)`
   display: inline;
   padding: 10px;
-  color: #f7f7f7;
+  color: #100f10;
   text-decoration: none;
   font-size: 80%;
   font-family: ${THEME.font.fontFamily};
   font-weight: ${THEME.font.weight.bold};
   text-transform: uppercase;
+  border: 1px solid #eee;
+  margin-right: 1.5rem;
 
   :hover {
     transition: border-bottom 0.4s linear;
-    border-bottom: 1px solid #fff;
+    border-bottom: 1px solid #100f10;
   }
 
   :last-of-type {
@@ -77,10 +80,9 @@ const LoginBtn = styled.button`
 export const RightNav = ({ open }) => {
   return (
     <Ul open={open}>
-      <Link to="/"> Home </Link>
-      <Link to="/about-me">About Me</Link>
-      <Link to="/contact-me">Contact</Link>
-      <Link to="/login">
+      <Link to='/'> Home </Link>
+      <Link to='/about-me'>About Me</Link>
+      <Link to='/login'>
         <LoginBtn>Login</LoginBtn>
       </Link>
     </Ul>
